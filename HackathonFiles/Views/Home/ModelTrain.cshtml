@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "ModelTrain";
+    ViewBag.Center = true;
+}
+
+<section >
+    @using (Html.BeginForm("ModelTrain", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class = "text-center" }))
+    {
+        <div class="form-group text-center">
+            <div class="form-group w-50 mx-auto">
+                <input type="uri" name="uri" class="form-control my-2" id="uri" placeholder="Добавить ссылку профиля "/>
+            </div>
+            <input type="submit" value="Обучмть модель" class="submit btn btn-secondary" />
+        </div>
+    }
+</section>
+

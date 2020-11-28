@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "FileUpload";
+    ViewBag.Center = true;
+}
+
+<section>
+    @using (Html.BeginForm("FileUpload", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class = "text-center" }))
+    {
+        <div class="form-group text-center imageContainer rounded-circle mx-auto">
+            <img id="image" class="imageUploader rounded-circle" />
+            <div class="center">Галерея</div>
+            <input type="file" name="file" id="file" class="d-none" accept="image/*" capture />
+        </div>
+        <input type="submit" value="Найти" class="submit btn btn-secondary" />
+    }
+</section>
+@section Scripts{
+    <script type="text/javascript">
+        $('#image').click(function () {
+            $('#file').click()
+        })
+        $('input[type="file"]').change(function(){
+            var file = $('input[type="file"]').get(0).files[0]
+            if (file) {
+                var reader = new FileReader()
+                reader.onload = function () {
+                    $("#image").attr("src", reader.result);
+                }
+                reader.readAsDataURL(file)
+            }
+        })
+    </script>
+}

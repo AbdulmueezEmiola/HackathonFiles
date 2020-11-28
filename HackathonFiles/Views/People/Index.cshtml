@@ -1,0 +1,120 @@
+﻿@model Person
+@{
+    ViewData["Title"] = "Index";
+    ViewBag.Center = false;
+}
+
+<div class="form-group imageContainer bg-white mx-auto">
+    <img src="~/ImageForTest/FIFAPUB.png" class="rounded-circle " />
+</div>
+<p class="text-center">@Model.Name <a href="@Model.vkLink"><span class="rounded-circle lightBackground p-2">VK</span></a> <a href="@Model.fbLink"><span class="rounded-circle lightBackground p-2">FB</span></a></p>
+<section class="lightBackground rounded p-2">
+    <h5>Requisite</h5>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <p class="col-2">INN</p>
+                    <p class="col text-dark font-weight-bold">@Model.INN</p>
+                </div>
+                <div class="row">
+                    <p class="col-2">INN</p>
+                    <p class="col text-dark font-weight-bold">@Model.INN</p>
+                </div>
+                <div class="row">
+                    <p class="col-2">KPP</p>
+                    <p class="col text-dark font-weight-bold">@Model.Kpp</p>
+                </div>
+                <div class="row">
+                    <p class="col-2">Ogrn</p>
+                    <p class="col text-dark font-weight-bold">@Model.Ogrn</p>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <p class="col-3">Date of Birth</p>
+                    <p class="col text-dark font-weight-bold">@Model.Dob</p>
+                </div>
+                <div class="row">
+                    <p class="col-3">City</p>
+                    <p class="col text-dark font-weight-bold">@Model.City</p>
+                </div>
+                <div class="row">
+                    <p class="col-3">Address</p>
+                    <p class="col text-dark font-weight-bold">@Model.Address</p>
+                </div>
+                <div class="row">
+                    <p class="col-3">Email</p>
+                    <p class="col text-dark font-weight-bold">@Model.Email</p>
+                </div>
+                <div class="row">
+                    <p class="col-3">Phone Number</p>
+                    <p class="col text-dark font-weight-bold">@Model.PhoneNumber</p>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <p class="col-2">Law Entities</p>
+                    <p class="col text-dark font-weight-bold">@Model.lawEntities</p>
+                </div>
+                <div class="row">
+                    <p class="col-2">IP</p>
+                    <p class="col text-dark font-weight-bold">@Model.Ip</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-3">
+            @foreach (var value in @Model.HashTags)
+            {
+                <span class="mr-3">#@value</span>
+            }
+        </div>        
+    </div>
+</section>
+<section class="mt-5">
+    <h4>Финансовый Профиль</h4>
+    <h5>Юр лица</h5>
+    <dl>
+        <dt>Компания</dt>
+        <dd>"@Model.CompanyLaw"</dd>
+        <dt>Статус</dt>
+        <dd>- @Model.Status</dd>
+        <dt>ИНН</dt>
+        <dd>- @Model.INN</dd>
+        <dt>Уплачивание налогов</dt>
+        <dd>- @(Model.PaidTax?"Упоачивает":"Не Уплачивает")</dd>
+        <dt>Доход</dt>
+        <dd>- @Model.Income</dd>
+        <dt>Расход</dt>
+        <dd>- @Model.Expense</dd>
+
+    </dl>
+    <h5>Арбитуражные дела по физ. лицам</h5>
+    <dl>
+        <dt>Компания</dt>
+        <dd>@Model.CompanyIndividual</dd>
+        <dt>Участники</dt>
+        <dd>- @Model.Participant</dd>
+        <dt>Номер</dt>
+        <dd>@Model.Number</dd>
+    </dl>
+    <h5>Кредитная история</h5>
+    <dl>
+        <dt>Лата Запроса</dt>
+        <dd>- @Model.RequestDate</dd>
+        <dt>Тип Кредита</dt>
+        <dd>- @Model.CreditType</dd>
+        <dt>Размер кредитования</dt>
+        <dd>- @Model.CreditSize руб</dd>
+        <dt>Срок кредитования</dt>
+        <dd>- @Model.CreditDuration месяцев</dd>
+    </dl>
+    <dl>
+        <dt>Фззп по физ лица</dt>
+        <dd>- @(!Model.FZZPIndividual ? "Нет": "Да")</dd>
+        <dt>Банкротсва по физ. лицам</dt>
+        <dd>- @(!Model.Bankrupt? "Нет": "Да")</dd>
+        <dt>Список экстримимтов</dt>
+        <dd>- @(!Model.ExtremistList?"Нет": "Да")</dd>
+    </dl>
+</section>
