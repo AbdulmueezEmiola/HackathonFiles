@@ -39,20 +39,38 @@ namespace HackathonFiles.Controllers
             {
                 await file.CopyToAsync(fs);
                 fs.Position = 0;
-                var task = firebaseClient.Child(Guid.NewGuid().ToString()).PutAsync(fs);
+                var task = firebaseClient.Child("Image").PutAsync(fs);
                 var downloadUrl = await task;
             }
         }
+        [HttpGet]
+        public ActionResult FileUpload()
+        {
+            return View("FileUpload");
+        }
+
+        [HttpPost]
         public async Task<IActionResult> FileUpload(IFormFile file)
         {
             await UploadFile(file, "Users/image/");            
-            return View("Index");
+            return View("FileUpload");
         }
+        [HttpGet]
+        public ActionResult ModelTrain()
+        {            
+            return View("ModelTrain");
+        }
+
+        [HttpPost]
         public async Task<IActionResult> ModelTrain(string uri)
         {
-            var firebaseClient = new FirebaseClient("https://hackathontest-e8d57.firebaseio.com/");
-            Url url = new Url { uris = uri.Split(';') };
-            var result =await firebaseClient.Child("Url").PostAsync(url);
+            var firebaseClient = new FirebaseStorage("hackathontest-e8d57.appspot.com");
+            var path = @"C:\Users\emiol\source\repos\HackathonFiles\HackathonFiles\TextFile1.txt.txt";
+            System.IO.File.WriteAllLines(path, uri.Split(';',','));
+            using(FileStream fs = System.IO.File.Open(path, FileMode.Open))
+            {
+                var result = await firebaseClient.Child("TextFileForUrls.txt").PutAsync(fs);
+            }
             return View("FileUpload");
         }
     }
